@@ -1,0 +1,153 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Login - ATProto Landing Builder{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div class="text-center">
+            <h2 class="text-3xl font-bold text-[var(--color-on-surface-strong)]">
+                Sign in with Bluesky
+            </h2>
+            <p class="mt-2 text-[var(--color-on-surface)]">
+                Connect your ATProto account to create your landing page
+            </p>
+        </div>
+
+        <div class="card">
+            <form x-data="loginForm()" @submit.prevent="login()">
+                <div class="space-y-6">
+                    <div>
+                        <label for="handle" class="block text-sm font-medium text-[var(--color-on-surface-strong)]">
+                            Bluesky Handle
+                        </label>
+                        <div class="mt-1">
+                            <input 
+                                id="handle" 
+                                name="handle" 
+                                type="text" 
+                                x-model="form.handle"
+                                placeholder="username.bsky.social"
+                                required 
+                                class="input-field"
+                            >
+                        </div>
+                        <p class="mt-1 text-xs text-[var(--color-on-surface)]">
+                            Your Bluesky username (with or without .bsky.social)
+                        </p>
+                    </div>
+
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-[var(--color-on-surface-strong)]">
+                            App Password
+                        </label>
+                        <div class="mt-1">
+                            <input 
+                                id="password" 
+                                name="password" 
+                                type="password" 
+                                x-model="form.password"
+                                required 
+                                class="input-field"
+                            >
+                        </div>
+                        <p class="mt-1 text-xs text-[var(--color-on-surface)]">
+                            Use an app password from your Bluesky settings
+                        </p>
+                    </div>
+
+                    <div x-show="error" class="bg-red-50 border border-red-200 rounded-md p-3">
+                        <p class="text-sm text-red-700" x-text="error"></p>
+                    </div>
+
+                    <div>
+                        <button 
+                            type="submit" 
+                            :disabled="loading"
+                            class="w-full btn-primary flex justify-center"
+                            :class="loading ? 'opacity-50 cursor-not-allowed' : ''"
+                        >
+                            <span x-show="!loading">Sign In</span>
+                            <span x-show="loading" class="flex items-center">
+                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Signing In...
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-sm text-[var(--color-on-surface)]">
+                    Don't have a Bluesky account? 
+                    <a href="https://bsky.app" target="_blank" class="text-[var(--color-primary)] hover:underline">
+                        Sign up here
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-blue-800">App Password Required</h3>
+                    <div class="mt-1 text-sm text-blue-700">
+                        <p>For security, use an app password instead of your main password. Generate one in your Bluesky settings under "App Passwords".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function loginForm() {
+    return {
+        form: {
+            handle: '',
+            password: ''
+        },
+        loading: false,
+        error: null,
+        
+        async login() {
+            this.loading = true;
+            this.error = null;
+            
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(this.form)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Store token and redirect
+                    localStorage.setItem('token', data.access_token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    window.location.href = '/dashboard';
+                } else {
+                    this.error = data.detail || 'Login failed';
+                }
+            } catch (err) {
+                this.error = 'Network error. Please try again.';
+            } finally {
+                this.loading = false;
+            }
+        }
+    }
+}
+</script>
+{% endblock %}

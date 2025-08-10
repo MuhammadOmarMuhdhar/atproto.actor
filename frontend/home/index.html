@@ -1,0 +1,124 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}ATProto Landing Builder - Create Your Decentralized Landing Page{% endblock %}
+
+{% block content %}
+<!-- Top navigation for homepage only -->
+<nav class="absolute top-0 left-0 right-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-end items-center h-16">
+            <div class="flex items-center space-x-6">
+                <a href="/pricing" class="hover:opacity-75 transition-opacity" style="color: var(--color-on-surface)">
+                    Pricing
+                </a>
+                <a href="/help" class="hover:opacity-75 transition-opacity" style="color: var(--color-on-surface)">
+                    Help
+                </a>
+                <a href="/login" class="bg-[var(--color-primary)] px-6 py-2 text-lg font-medium hover:opacity-90 transition-opacity" style="color: var(--color-on-primary)">
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Static hero section -->
+<div class="relative w-full" style="background-color: var(--color-surface)">
+    <div class="h-[60vh] flex items-center">
+        <!-- Left side: Logo and content -->
+        <div class="w-2/5 px-16 ml-20 flex flex-col justify-center">
+            <div style="color: var(--color-on-surface-strong)">
+                <h1 class="text-6xl font-bold mb-4" style="color: var(--color-on-surface-strong)">atproto.actor</h1>
+                <p class="text-xl mb-6" style="color: var(--color-on-surface)">Where people can find you on the social internet</p>
+                <!-- <ul class="text-lg mb-8 space-y-2 text-left ml-8" style="color: var(--color-on-surface)">
+                    <li class="flex items-center">
+                        <span class="mr-3" style="color: var(--color-primary)">•</span>
+                        Sync your Bluesky profile automatically
+                    </li>
+                    <li class="flex items-center">
+                        <span class="mr-3" style="color: var(--color-primary)">•</span>
+                        Choose from professional templates
+                    </li>
+                    <li class="flex items-center">
+                        <span class="mr-3" style="color: var(--color-primary)">•</span>
+                        Custom domain support
+                    </li>
+                </ul> -->
+                <a href="/login" class="bg-[var(--color-primary)] px-8 py-3 text-lg font-medium hover:opacity-90 transition-opacity ml-0" style="color: var(--color-on-primary)">
+                    Create a Page
+                </a>
+            </div>
+        </div>
+        <!-- Right side: Image square -->
+        <div class="w-3/5 flex" style="margin-left: -10px;">
+            <div class="w-100 h-100 border-1 ml-8" style="border-color: var(--color-outline)">
+                <img src="frontend/assets/images/20250810_1223_Simplified Octopus Logo_remix_01k2apv2rff3es2654vh8y8y25.png" alt="Landing page preview" class="w-full h-full object-cover opacity-85">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Large horizontal card section -->
+<section class="py-12 px-4" style="background-color: var(--color-surface)">
+    <div class="max-w-7xl mx-auto">
+        <div class="card flex">
+            <!-- Left side: Text content -->
+            <div class="w-1/2 pr-8">
+                <h2 class="text-3xl font-bold mb-4" style="color: var(--color-on-surface-strong)">Why Choose ATProtocol?</h2>
+                <p class="text-lg mb-6" style="color: var(--color-on-surface)">
+                    Build your professional presence on the decentralized web. Connect your Bluesky identity 
+                    and create beautiful landing pages that showcase your content and grow your audience.
+                </p>
+                <p class="text-base" style="color: var(--color-on-surface)">
+                    Join thousands of creators who are taking control of their digital identity with ATProtocol.
+                </p>
+            </div>
+            
+            <!-- Right side: Two side-by-side cards -->
+            <div class="w-1/2 pl-8 flex space-x-4">
+                <a href="/dashboard" class="card flex-1 block hover:opacity-75 transition-opacity cursor-pointer">
+                    <div class="flex flex-col justify-between h-full">
+                        <h3 class="text-xl font-semibold" style="color: var(--color-on-surface-strong)">Automatic Sync</h3>
+                        <div class="flex justify-end mt-4">
+                            <svg class="w-5 h-5" style="color: var(--color-on-surface)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+                <a href="/help" class="card flex-1 block hover:opacity-75 transition-opacity cursor-pointer">
+                    <div class="flex flex-col justify-between h-full">
+                        <h3 class="text-xl font-semibold" style="color: var(--color-on-surface-strong)">Professional Templates</h3>
+                        <div class="flex justify-end mt-4">
+                            <svg class="w-5 h-5" style="color: var(--color-on-surface)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features section -->
+<section class="py-16 px-4">
+    <div class="max-w-7xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-[var(--color-on-surface-strong)] mb-12">Why ATProto Landing Builder?</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-4">Decentralized Identity</h3>
+                <p>Connect your Bluesky account and own your digital presence</p>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-4">Auto-Sync Content</h3>
+                <p>Your landing page updates automatically with your latest posts</p>
+            </div>
+            <div class="card">
+                <h3 class="text-xl font-semibold mb-4">Professional Templates</h3>
+                <p>Choose from beautiful, responsive designs for any use case</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

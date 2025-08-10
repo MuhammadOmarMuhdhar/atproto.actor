@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ATProto Landing Builder{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/frontend/assets/css/main.css">
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body>
+    <nav class="fixed top-0 left-0 right-0 z-40" style="background-color: var(--color-surface)">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-2xl font-bold">
+                        <span style="color: var(--color-primary)">@ AT</span><span style="color: var(--color-on-surface-strong)">Protocol</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-6">
+                    {% if user %}
+                        <a href="/dashboard" class="hover:opacity-75 transition-opacity" style="color: var(--color-on-surface)">
+                            Dashboard
+                        </a>
+                        <a href="/account-settings" class="hover:opacity-75 transition-opacity" style="color: var(--color-on-surface)">
+                            Settings
+                        </a>
+                        <button onclick="logout()" class="btn-secondary">
+                            Logout
+                        </button>
+                    {% else %}
+                        <a href="/help" class="hover:opacity-75 transition-opacity" style="color: var(--color-on-surface)">
+                            Help
+                        </a>
+                        <a href="/login" class="hover:opacity-75 transition-opacity" style="color: var(--color-on-surface)">
+                            Login
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="min-h-screen pt-16">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-[var(--color-surface-alt)] border-t border-[var(--color-outline)] py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="mb-8">
+                <h3 class="text-xl font-bold text-[var(--color-on-surface-strong)] mb-4">ATProto Landing Builder</h3>
+                <p class="text-[var(--color-on-surface)] max-w-2xl mx-auto">
+                    Create beautiful, personalized landing pages using your Bluesky profile data. 
+                    Connect your ATProto identity to the web.
+                </p>
+            </div>
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="/help" class="text-[var(--color-on-surface)] hover:text-[var(--color-primary)] transition-colors">Help</a>
+                <a href="/pricing" class="text-[var(--color-on-surface)] hover:text-[var(--color-primary)] transition-colors">Pricing</a>
+                <a href="https://github.com" class="text-[var(--color-on-surface)] hover:text-[var(--color-primary)] transition-colors">GitHub</a>
+            </div>
+            <p class="text-sm text-[var(--color-on-surface)] opacity-75">
+                &copy; 2025 ATProto Landing Builder. Built for the decentralized web.
+            </p>
+        </div>
+    </footer>
+
+    <script src="/frontend/assets/js/app.js"></script>
+</body>
+</html>
